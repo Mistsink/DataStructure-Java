@@ -1,11 +1,11 @@
-import MergeSort.MergeSort;
+import QuickSort.QuickSort;
 
 public class Main {
     public static void main(String[] args) {
         Integer[] arr = { 1, 3, 4, 1, 7,2 ,3, 1};
         printArr(arr);
 
-        MergeSort.sort(arr);
+        QuickSort.QuickSort(arr);
         printArr(arr);
 
     }
