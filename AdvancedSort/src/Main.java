@@ -1,11 +1,12 @@
 import QuickSort.QuickSort;
+import ShellSort.ShellSort;
 
 public class Main {
     public static void main(String[] args) {
-        Integer[] arr = { 1, 3, 4, 1, 7,2 ,3, 1};
+        Integer[] arr = { 1, 3, 4, 1, 7, 2 ,3, 1};
         printArr(arr);
 
-        QuickSort.QuickSort(arr);
+        ShellSort.sort(arr);
         printArr(arr);
 
     }
