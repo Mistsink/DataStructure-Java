@@ -1,3 +1,7 @@
+/**
+ * 线段树（区间树）
+ * @param <T>
+ */
 public class SegmentTree<T> {
 
     private T[] data;

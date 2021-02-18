@@ -1,3 +1,7 @@
+/**
+ * 最大堆（大根堆）
+ * @param <T>
+ */
 public class MaxHeap<T extends Comparable<T>> {
     private Array<T> arr;
 

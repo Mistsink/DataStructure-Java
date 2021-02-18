@@ -2,6 +2,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * 二分搜索树
+ * @param <T>
+ */
 public class BST<T extends Comparable<T>> {
     private class Node{
         public T e;
