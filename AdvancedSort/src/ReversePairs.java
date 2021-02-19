@@ -1,6 +1,9 @@
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+/**
+ * 逆序对
+ */
 public class ReversePairs {
     private int count;
 
