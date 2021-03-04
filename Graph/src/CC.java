@@ -57,7 +57,7 @@ public class CC {
         for (int v = 0; v < G.V(); v ++) {
             res[visited[v]].add(v);
         }
-        
+
         return res;
     }
 
