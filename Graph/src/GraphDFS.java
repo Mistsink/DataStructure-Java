@@ -14,7 +14,9 @@ public class GraphDFS {
         visited = new boolean[G.V()];
 
         for (int v = 0; v < G.V(); v ++)
-            if (!visited[v]) dfs(0);
+            if (!visited[v]) {
+                dfs(0);
+            }
     }
 
 
