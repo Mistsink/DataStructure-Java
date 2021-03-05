@@ -1,7 +1,9 @@
+package DFS;
+import Graph.Graph;
 import java.util.ArrayList;
 
 /**
- * CC :     Connected Component
+ * DFS.CC :     Connected Component
  *  连通分量
  */
 public class CC {

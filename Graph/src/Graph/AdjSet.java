@@ -1,20 +1,22 @@
+package Graph;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.TreeSet;
 
-public class AdjList {
+public class AdjSet {
     private int V, E;
-    private LinkedList<Integer>[] adj;
+    private TreeSet<Integer>[] adj;
 
-    public AdjList (String fileName) {
+    public AdjSet (String fileName) {
         File file = new File(fileName);
 
         try (Scanner scanner = new Scanner(file)) {
 
             V = scanner.nextInt();
-            adj = new LinkedList[V];
-            for (int i = 0; i < V; i++) adj[i] = new LinkedList<>();
+            adj = new TreeSet[V];
+            for (int i = 0; i < V; i++) adj[i] = new TreeSet<>();
             E = scanner.nextInt();
 
             for (int i = 0; i < E; i ++) {
@@ -51,7 +53,7 @@ public class AdjList {
      * @param v     给定顶点
      * @return
      */
-    public LinkedList<Integer> adj (int v) {
+    public Iterable<Integer> adj (int v) {
         return adj[v];
     }
 
@@ -62,7 +64,7 @@ public class AdjList {
      * @return
      */
     public int degree (int v) {
-        return adj(v).size();
+        return adj[v].size();
     }
 
 
@@ -82,7 +84,7 @@ public class AdjList {
     }
 
     public static void main(String[] args) {
-        AdjList adjList = new AdjList("g.txt");
-        System.out.println(adjList);
+        AdjSet adjSet = new AdjSet("g.txt");
+        System.out.println(adjSet);
     }
 }

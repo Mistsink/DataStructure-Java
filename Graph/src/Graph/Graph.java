@@ -1,26 +1,29 @@
+package Graph;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeSet;
 
-public class AdjMatrix {
+public class Graph {
     private int V, E;
-    private int[][] adj;
+    private TreeSet<Integer>[] adj;
 
-    public AdjMatrix (String fileName) {
+    public Graph (String fileName) {
         File file = new File(fileName);
 
         try (Scanner scanner = new Scanner(file)) {
 
             V = scanner.nextInt();
-            adj = new int[V][V];
+            adj = new TreeSet[V];
+            for (int i = 0; i < V; i++) adj[i] = new TreeSet<>();
             E = scanner.nextInt();
 
             for (int i = 0; i < E; i ++) {
-                int a = scanner.nextInt(), b = scanner.nextInt();
+                int v = scanner.nextInt(), w = scanner.nextInt();
 
-                adj[a][b] = 1;
-                adj[b][a] = 1;
+                adj[v].add(w);
+                adj[w].add(v);
             }
 
         } catch (IOException e) {
@@ -40,8 +43,8 @@ public class AdjMatrix {
     }
 
 
-    public boolean hasEdge (int a, int b) {
-        return adj[a][b] == 1;
+    public boolean hasEdge (int v, int w) {
+        return adj[v].contains(w);
     }
 
 
@@ -50,13 +53,8 @@ public class AdjMatrix {
      * @param v     给定顶点
      * @return
      */
-    public ArrayList<Integer> adj (int v) {
-        ArrayList<Integer> res = new ArrayList<>();
-
-        for (int i = 0; i < V; i ++)
-            if (adj[v][i] == 1) res.add(i);
-
-        return res;
+    public Iterable<Integer> adj (int v) {
+        return adj[v];
     }
 
 
@@ -66,7 +64,7 @@ public class AdjMatrix {
      * @return
      */
     public int degree (int v) {
-        return adj(v).size();
+        return adj[v].size();
     }
 
 
@@ -76,16 +74,17 @@ public class AdjMatrix {
         StringBuilder ret = new StringBuilder();
         ret.append(String.format("V = %d, E = %d\n", V, E));
 
-        for (int i = 0; i < V; i++) {
-            for (int j = 0; j < V; j ++)
-                ret.append(String.format("%d ", adj[i][j]));
+        for (int v = 0; v < V; v++) {
+            ret.append(String.format("%d: ", v));
+            for (int w : adj[v])
+                ret.append(String.format("%d ", w));
             ret.append('\n');
         }
         return ret.toString();
     }
 
     public static void main(String[] args) {
-        AdjMatrix adjMatrix = new AdjMatrix("g.txt");
-        System.out.println(adjMatrix);
+        Graph graph = new Graph("g.txt");
+        System.out.println(graph);
     }
 }

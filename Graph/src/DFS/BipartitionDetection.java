@@ -1,3 +1,7 @@
+package DFS;
+
+import Graph.Graph;
+
 /**
  * 二分图
  */

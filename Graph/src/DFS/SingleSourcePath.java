@@ -1,22 +1,22 @@
+package DFS;
+import Graph.Graph;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * 路径
+ * 单源路径
  */
-public class Path {
+public class SingleSourcePath {
 
     private Graph G;
     private int s;
-    private int t;
     private boolean[] visited;
 
     private int[] pre; //  记录深度遍历时，每一个顶点的前一个顶点
 
-    public Path(Graph G, int source, int target) {
+    public SingleSourcePath(Graph G, int source) {
         this.G = G;
         s = source;
-        t = target;
         visited = new boolean[G.V()];
         pre = new int[G.V()];
         for (int i = 0; i < pre.length; i ++) pre[i] = -1;
@@ -25,34 +25,30 @@ public class Path {
     }
 
 
-    private boolean dfs(int v, int pre) {
+    private void dfs(int v, int pre) {
 
         visited[v] = true;
         this.pre[v] = pre;
 
-        if (v == t) return true;
-
         for (int w : this.G.adj(v))
-            if (!visited[w])
-                if (dfs(w, v)) return true;
+            if (!visited[w]) dfs(w, v);
 
-        return false;
     }
 
 
-    public boolean isConnected () {
-        return visited[t];
+    public boolean isConnected (int w) {
+        return visited[w];
     }
 
 
 
-    public ArrayList<Integer> path() {
+    public ArrayList<Integer> path(int v) {
 
         ArrayList<Integer> res = new ArrayList<>();
 
-        if (!isConnected()) return res;
+        if (!isConnected(v)) return res;
 
-        int cur = t;
+        int cur = v;
 
         while (cur != s) {
             res.add(cur);
@@ -67,8 +63,8 @@ public class Path {
 
     public static void main(String[] args) {
         Graph graph = new Graph("g.txt");
-        Path path = new Path(graph, 0, 3);
-        System.out.println(path.path());
+        SingleSourcePath ssPath = new SingleSourcePath(graph, 0);
+        System.out.println(ssPath.path(3));
     }
 
 }

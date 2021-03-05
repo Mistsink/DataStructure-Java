@@ -1,3 +1,5 @@
+package DFS;
+import Graph.Graph;
 import java.util.ArrayList;
 
 public class GraphDFS {
