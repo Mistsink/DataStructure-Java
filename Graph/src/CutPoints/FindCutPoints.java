@@ -65,9 +65,9 @@ public class FindCutPoints {
         FindCutPoints fc = new FindCutPoints(g);
         System.out.println("Cut Points in g : " + fc.result());
 
-        Graph g2 = new Graph("g1.txt");
+        Graph g2 = new Graph("g2.txt");
         FindCutPoints fc2 = new FindCutPoints(g2);
-        System.out.println("Cut Points in g1 : " + fc2.result());
+        System.out.println("Cut Points in g2 : " + fc2.result());
 
         Graph tree = new Graph("tree.txt");
         FindCutPoints fc3 = new FindCutPoints(tree);
