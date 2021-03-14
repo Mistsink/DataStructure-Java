@@ -3,15 +3,15 @@ import java.util.*;
 
 public class Solution {
 
-    private int[][] graph;
-    private boolean[] visited;
-    private int[] colors;
+
 
 /*
      * 785. 判断二分图
      * @param graph
      * @return
-
+    private int[][] graph;
+    private boolean[] visited;
+    private int[] colors;
 
     public boolean isBipartite(int[][] graph) {
         this.graph = graph;
@@ -189,10 +189,13 @@ public class Solution {
         return -1;
     }
 
+ */
+
 
     /**
      * 773. 滑动谜题
      */
+    /**
     public int slidingPuzzle(int[][] board) {
         Queue<String> queue = new LinkedList<>();
         HashMap<String, Integer> visited = new HashMap<>();
@@ -264,7 +267,61 @@ public class Solution {
 
         return board;
     }
+    */
 
+
+    /**
+     * 980. 不同路径 III
+     */
+    private int[][] grid;
+    private boolean[][] visited;
+    private int start, end, R, C;
+    private int[][] dirs = {{-1, 0}, {1, 0}, {0, 1},{0, -1}};
+    public int uniquePathsIII(int[][] grid) {
+        this.grid = grid;
+        R = grid.length;
+        C = grid[0].length;
+        visited = new boolean[R][C];
+        int leftCount = R * C;
+
+        for (int i = 0; i < R; i ++)
+            for (int j = 0; j < C; j ++) {
+                if (grid[i][j] == 1) {
+                    start = C * i + j;
+                    grid[i][j] = 0;
+                } else if (grid[i][j] == 2) {
+                    end = C * i + j;
+                    grid[i][j] = 0;
+                } else if (grid[i][j] == -1) {
+                    leftCount --;
+                }
+            }
+
+        return dfs(start, leftCount);
+    }
+    private int dfs(int v, int leftCount) {
+        int x = v / C, y = v % C;
+        visited[x][y] = true;
+        leftCount --;
+        if (leftCount == 0 && v == end) {
+            visited[x][y] = false;      //  状态回溯
+            return 1;
+        }
+
+        int res = 0;
+        for (int d = 0; d < 4; d ++) {
+            int nextX = x + dirs[d][0], nextY = y + dirs[d][1];
+            if (inArea(nextX, nextY) && grid[nextX][nextY] == 0 && !visited[nextX][nextY]) {
+                res += dfs(nextX * C + nextY, leftCount);
+            }
+        }
+
+        visited[x][y] = false;      //  状态回溯
+        return res;
+    }
+    private boolean inArea(int x, int y) {
+        return x >= 0 && x < R && y >=0 && y < C;
+    }
 
 
 }

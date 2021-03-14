@@ -19,34 +19,33 @@ public class HamiltonLoop {
         this.G = G;
         visited = new boolean[G.V()];
         pre = new int[G.V()];
-        dfs(0, 0);
+        dfs(0, 0, G.V());
     }
 
 
-    private boolean dfs(int v, int parent){
+    private boolean dfs(int v, int parent, int leftCount){
 
         visited[v] = true;
         pre[v] = parent;
-        for(int w: G.adj(v)) {
-            if(!visited[w]) {
-                if (dfs(w, v)) return true;
-            } else if (w == 0 && allVisited()) {
-                end = v;
-                return true;
-            }
+        leftCount --;
+
+        if (leftCount == 0 && G.hasEdge(v, 0)) {
+            end = v;
+            return true;
         }
+
+        for(int w: G.adj(v))
+            if(!visited[w]) {
+                if (dfs(w, v, leftCount)) return true;
+            }
 
 
         visited[v] = false;     //  进行该节点的回溯
+        //  leftCount ++;    这里不需要将leftCount回溯状态
+        //  因为函数参数的该leftCount是int型，为值传递而非引用传递
         return false;
     }
 
-    private boolean allVisited() {
-        for (boolean v : visited)
-            if (!v) return false;
-
-        return true;
-    }
 
 
     public ArrayList<Integer> loopPath () {
